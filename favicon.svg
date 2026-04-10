@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="neon-stroke" x1="16" y1="14" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A1FAFF"/>
+      <stop offset="0.55" stop-color="#69E9FF"/>
+      <stop offset="1" stop-color="#D575FF"/>
+    </linearGradient>
+    <radialGradient id="neon-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(46 18) rotate(90) scale(16)">
+      <stop stop-color="#A1FAFF" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#A1FAFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="18" fill="#0A0E14"/>
+  <rect x="2.5" y="2.5" width="59" height="59" rx="15.5" stroke="url(#neon-stroke)" stroke-opacity="0.35"/>
+  <circle cx="46" cy="18" r="16" fill="url(#neon-glow)"/>
+
+  <path
+    d="M19 15.5V48.5"
+    stroke="url(#neon-stroke)"
+    stroke-width="7"
+    stroke-linecap="round"
+  />
+  <path
+    d="M23.5 16H34.5C41.4 16 46 20.3 46 26.5C46 32.7 41.4 37 34.5 37H23.5"
+    stroke="url(#neon-stroke)"
+    stroke-width="7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <circle cx="44.5" cy="45.5" r="8" fill="#D575FF" opacity="0.15"/>
+  <circle cx="44.5" cy="45.5" r="4.5" fill="#D575FF"/>
+</svg>
