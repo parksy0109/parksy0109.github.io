@@ -16,17 +16,10 @@
   <circle cx="46" cy="18" r="16" fill="url(#neon-glow)"/>
 
   <path
-    d="M19 15.5V48.5"
-    stroke="url(#neon-stroke)"
-    stroke-width="7"
-    stroke-linecap="round"
-  />
-  <path
-    d="M23.5 16H34.5C41.4 16 46 20.3 46 26.5C46 32.7 41.4 37 34.5 37H23.5"
-    stroke="url(#neon-stroke)"
-    stroke-width="7"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    fill="url(#neon-stroke)"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M20 12C17.7909 12 16 13.7909 16 16V48C16 50.2091 17.7909 52 20 52C22.2091 52 24 50.2091 24 48V38H35C42.732 38 48 32.732 48 25C48 17.268 42.732 12 35 12H20ZM24 18V32H34.5C38.183 32 40.5 29.3137 40.5 25C40.5 20.6863 38.183 18 34.5 18H24Z"
   />
 
   <circle cx="44.5" cy="45.5" r="8" fill="#D575FF" opacity="0.15"/>
