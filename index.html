@@ -6,11 +6,11 @@
     <title>박수용 | Backend Developer Portfolio</title>
     <meta
       name="description"
-      content="박수용의 포트폴리오. 2021년 7월부터 이어진 백엔드 중심 경력과 챗봇·AICC·메시징 플랫폼·OpenAI 연동, React와 Android까지 이어지는 실무 경험을 정리했습니다."
+      content="박수용의 포트폴리오. 2021년 7월부터 이어진 백엔드 중심 경력과 챗봇·AICC·메시징 플랫폼·OpenAI 연동, React와 Android 실무 경험, 그리고 현재 AI Agents 활용 흐름까지 정리했습니다."
     />
     <meta
       name="keywords"
-      content="박수용, 백엔드 개발자, Spring Boot, Java, React, Kotlin, 챗봇, AICC, OpenAI, Android"
+      content="박수용, 백엔드 개발자, Spring Boot, Java, React, Kotlin, 챗봇, AICC, OpenAI, Android, AI Agents, GitHub Pages"
     />
     <meta name="theme-color" content="#0a0e14" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -266,9 +266,10 @@
       <a class="font-headline text-xl font-bold uppercase tracking-tight text-cyan-400" href="#home">
         PARK DOSSIER
       </a>
-      <div class="hidden items-center gap-8 md:flex">
+      <div class="hidden items-center gap-6 md:flex lg:gap-8">
         <a class="nav-link top-nav-link border-b-2 border-transparent pb-1 font-['Space_Grotesk'] tracking-tight text-slate-400 transition-all duration-300 hover:bg-slate-800/50 hover:text-cyan-300" data-nav-target="home" href="#home">Home</a>
         <a class="nav-link top-nav-link border-b-2 border-transparent pb-1 font-['Space_Grotesk'] tracking-tight text-slate-400 transition-all duration-300 hover:bg-slate-800/50 hover:text-cyan-300" data-nav-target="experience" href="#experience">Experience</a>
+        <a class="nav-link top-nav-link border-b-2 border-transparent pb-1 font-['Space_Grotesk'] tracking-tight text-slate-400 transition-all duration-300 hover:bg-slate-800/50 hover:text-cyan-300" data-nav-target="agents" href="#agents">AI Agents</a>
         <a class="nav-link top-nav-link border-b-2 border-transparent pb-1 font-['Space_Grotesk'] tracking-tight text-slate-400 transition-all duration-300 hover:bg-slate-800/50 hover:text-cyan-300" data-nav-target="projects" href="#projects">Projects</a>
         <a class="nav-link top-nav-link border-b-2 border-transparent pb-1 font-['Space_Grotesk'] tracking-tight text-slate-400 transition-all duration-300 hover:bg-slate-800/50 hover:text-cyan-300" data-nav-target="stacks" href="#stacks">Stacks</a>
         <a class="nav-link top-nav-link border-b-2 border-transparent pb-1 font-['Space_Grotesk'] tracking-tight text-slate-400 transition-all duration-300 hover:bg-slate-800/50 hover:text-cyan-300" data-nav-target="contact" href="#contact">Contact</a>
@@ -308,6 +309,10 @@
         <a class="nav-link side-nav-link flex items-center gap-4 rounded-lg border-r-2 border-transparent px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" data-nav-target="experience" href="#experience">
           <span class="material-symbols-outlined">timeline</span>
           <span class="sidebar-link-label font-label text-sm uppercase tracking-widest">Timeline</span>
+        </a>
+        <a class="nav-link side-nav-link flex items-center gap-4 rounded-lg border-r-2 border-transparent px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" data-nav-target="agents" href="#agents">
+          <span class="material-symbols-outlined">smart_toy</span>
+          <span class="sidebar-link-label font-label text-sm uppercase tracking-widest">Agents</span>
         </a>
         <a class="nav-link side-nav-link flex items-center gap-4 rounded-lg border-r-2 border-transparent px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" data-nav-target="projects" href="#projects">
           <span class="material-symbols-outlined">terminal</span>
@@ -369,7 +374,7 @@
                 </p>
                 <p class="text-on-surface-variant"><span class="text-primary">guest@parksy:</span><span class="text-secondary">~</span>$ ls scope/</p>
                 <p class="leading-7 text-on-surface">
-                  backend&nbsp;&nbsp;frontend&nbsp;&nbsp;android&nbsp;&nbsp;ai-integration&nbsp;&nbsp;deployment
+                  backend&nbsp;&nbsp;frontend&nbsp;&nbsp;android&nbsp;&nbsp;ai-integration&nbsp;&nbsp;agent-workflow&nbsp;&nbsp;deployment
                 </p>
                 <p class="text-on-surface-variant"><span class="text-primary">guest@parksy:</span><span class="text-secondary">~</span>$ <span class="animate-pulse">_</span></p>
               </div>
@@ -399,6 +404,10 @@
                 <div>
                   <p class="font-label text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Roles</p>
                   <p class="mt-2 text-sm leading-7 text-on-surface-variant">Backend, Frontend, Android, AI Integration, Delivery</p>
+                </div>
+                <div>
+                  <p class="font-label text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Current Workflow</p>
+                  <p class="mt-2 text-sm leading-7 text-on-surface-variant">AI Agents, GitHub Pages, Branch &amp; PR Iteration</p>
                 </div>
                 <div>
                   <p class="font-label text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Archive Counts</p>
@@ -518,6 +527,145 @@
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="relative overflow-hidden bg-surface-container px-8 py-32 md:px-16" id="agents">
+        <div class="pointer-events-none absolute inset-0">
+          <div class="absolute -left-20 top-12 h-72 w-72 rounded-full bg-primary/10 blur-[120px]"></div>
+          <div class="absolute right-0 top-24 h-80 w-80 rounded-full bg-secondary/10 blur-[140px]"></div>
+        </div>
+        <div class="relative mx-auto max-w-6xl">
+          <div class="mb-16 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p class="mb-2 font-label text-sm uppercase tracking-[0.3em] text-primary">Current Workflow</p>
+              <h2 class="font-headline text-4xl font-bold text-on-surface md:text-5xl">How I Use AI Agents Today</h2>
+            </div>
+            <div class="max-w-xl text-sm leading-7 text-on-surface-variant">
+              AI Agents를 경력 과장용 키워드가 아니라, 현재 작업 속도를 높이는 보조 시스템으로
+              활용합니다. 요구사항 구조화, 디자인 레퍼런스 해석, 반복 수정, 브랜치·PR 단위
+              정리까지 빠르게 돌리되, 사실 확인과 최종 공개 판단은 직접 맡습니다.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-7">
+              <div class="project-art bg-[radial-gradient(circle_at_18%_22%,rgba(161,250,255,0.18),transparent_24%),radial-gradient(circle_at_84%_26%,rgba(213,117,255,0.18),transparent_22%),linear-gradient(135deg,rgba(161,250,255,0.08),rgba(213,117,255,0.02))]"></div>
+              <div class="relative p-8">
+                <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-surface-container-highest/60 px-3 py-1">
+                  <span class="material-symbols-outlined text-sm text-primary">smart_toy</span>
+                  <span class="font-label text-[10px] uppercase tracking-[0.24em] text-primary">Agent Loop in Practice</span>
+                </div>
+                <div class="space-y-3 font-mono text-sm md:text-base">
+                  <p class="text-on-surface-variant"><span class="text-primary">agent@parksy:</span><span class="text-secondary">~</span>$ ingest brief --resume --design --feedback</p>
+                  <p class="leading-7 text-on-surface">
+                    경력 문서, 현재 페이지, 디자인 레퍼런스, 수정 피드백을 함께 읽고 누락 항목과
+                    수정 우선순위를 먼저 정리합니다.
+                  </p>
+                  <p class="text-on-surface-variant"><span class="text-primary">agent@parksy:</span><span class="text-secondary">~</span>$ patch ui --html --css --state-sync</p>
+                  <p class="leading-7 text-on-surface">
+                    레이아웃 초안, 사이드 메뉴, active 상태, 카피, 아이콘 같은 디테일을 빠르게
+                    반복 수정하며 결과를 압축합니다.
+                  </p>
+                  <p class="text-on-surface-variant"><span class="text-primary">agent@parksy:</span><span class="text-secondary">~</span>$ ship change --branch --commit --pr</p>
+                  <p class="leading-7 text-on-surface">
+                    기능 단위 브랜치를 만들고, 커밋과 PR로 변경을 관리합니다. 받은 피드백은 같은
+                    흐름 안에서 바로 다시 반영합니다.
+                  </p>
+                </div>
+                <div class="mt-8 flex flex-wrap gap-3">
+                  <span class="rounded-full border border-primary/20 bg-primary/10 px-4 py-2 font-label text-[10px] uppercase tracking-[0.2em] text-primary">Context Mapping</span>
+                  <span class="rounded-full border border-secondary/20 bg-secondary/10 px-4 py-2 font-label text-[10px] uppercase tracking-[0.2em] text-secondary">Design Patch</span>
+                  <span class="rounded-full border border-primary/20 bg-primary/10 px-4 py-2 font-label text-[10px] uppercase tracking-[0.2em] text-primary">Navigation QA</span>
+                  <span class="rounded-full border border-secondary/20 bg-secondary/10 px-4 py-2 font-label text-[10px] uppercase tracking-[0.2em] text-secondary">PR Loop</span>
+                </div>
+              </div>
+            </article>
+
+            <aside class="glass-panel ghost-border rounded-2xl p-8 md:col-span-5">
+              <p class="font-label text-[10px] uppercase tracking-[0.24em] text-secondary">What Stays Human</p>
+              <div class="mt-6 space-y-4">
+                <div class="rounded-xl border border-outline-variant/20 bg-surface-container-highest/40 p-5">
+                  <div class="flex items-start gap-4">
+                    <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+                      <span class="material-symbols-outlined text-lg">fact_check</span>
+                    </span>
+                    <div>
+                      <p class="font-headline text-lg font-bold text-on-surface">Fact Check First</p>
+                      <p class="mt-2 text-sm leading-7 text-on-surface-variant">
+                        경력 기간, 팀명, 프로젝트 수, 표현 수위는 원본 기준으로 다시 확인합니다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="rounded-xl border border-outline-variant/20 bg-surface-container-highest/40 p-5">
+                  <div class="flex items-start gap-4">
+                    <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-secondary/10 text-secondary">
+                      <span class="material-symbols-outlined text-lg">tune</span>
+                    </span>
+                    <div>
+                      <p class="font-headline text-lg font-bold text-on-surface">Tone Calibration</p>
+                      <p class="mt-2 text-sm leading-7 text-on-surface-variant">
+                        AI가 만든 문장을 그대로 두지 않고, 읽히는 톤과 과장 여부를 끝까지 다듬습니다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="rounded-xl border border-outline-variant/20 bg-surface-container-highest/40 p-5">
+                  <div class="flex items-start gap-4">
+                    <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+                      <span class="material-symbols-outlined text-lg">rule</span>
+                    </span>
+                    <div>
+                      <p class="font-headline text-lg font-bold text-on-surface">Final Decision</p>
+                      <p class="mt-2 text-sm leading-7 text-on-surface-variant">
+                        공개 여부와 머지 판단은 사람이 합니다. AI output은 실행 속도를 높이는 보조 수단으로만 둡니다.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <article class="h-full rounded-2xl border border-outline-variant/20 bg-surface-container-low/80 p-6">
+              <div class="mb-4 inline-flex rounded-full bg-primary/10 p-3 text-primary">
+                <span class="material-symbols-outlined">schema</span>
+              </div>
+              <p class="font-headline text-xl font-bold text-on-surface">Context Structuring</p>
+              <p class="mt-3 text-sm leading-7 text-on-surface-variant">
+                요구사항과 이력 정보를 읽고, 빠진 경력과 프로젝트가 없는지 먼저 교차 확인합니다.
+              </p>
+            </article>
+            <article class="h-full rounded-2xl border border-outline-variant/20 bg-surface-container-low/80 p-6">
+              <div class="mb-4 inline-flex rounded-full bg-secondary/10 p-3 text-secondary">
+                <span class="material-symbols-outlined">brush</span>
+              </div>
+              <p class="font-headline text-xl font-bold text-on-surface">Visual Iteration</p>
+              <p class="mt-3 text-sm leading-7 text-on-surface-variant">
+                레퍼런스 디자인을 기준으로 카드 배치, 타이포, 토글, 아이콘 디테일을 반복 수정합니다.
+              </p>
+            </article>
+            <article class="h-full rounded-2xl border border-outline-variant/20 bg-surface-container-low/80 p-6">
+              <div class="mb-4 inline-flex rounded-full bg-primary/10 p-3 text-primary">
+                <span class="material-symbols-outlined">integration_instructions</span>
+              </div>
+              <p class="font-headline text-xl font-bold text-on-surface">Patch Execution</p>
+              <p class="mt-3 text-sm leading-7 text-on-surface-variant">
+                HTML, CSS, 카피, 인터랙션을 작은 단위로 바로 반영하고 결과를 눈에 보이게 정리합니다.
+              </p>
+            </article>
+            <article class="h-full rounded-2xl border border-outline-variant/20 bg-surface-container-low/80 p-6">
+              <div class="mb-4 inline-flex rounded-full bg-secondary/10 p-3 text-secondary">
+                <span class="material-symbols-outlined">account_tree</span>
+              </div>
+              <p class="font-headline text-xl font-bold text-on-surface">Branch Workflow</p>
+              <p class="mt-3 text-sm leading-7 text-on-surface-variant">
+                브랜치 생성, 커밋, 푸시, PR 흐름으로 변경을 분리해 피드백 반영 속도를 유지합니다.
+              </p>
+            </article>
           </div>
         </div>
       </section>
@@ -978,7 +1126,7 @@
     </main>
 
     <div
-      class="fixed bottom-0 z-50 flex w-full items-center justify-around border-t border-outline-variant/10 bg-slate-950/80 py-4 backdrop-blur-xl lg:hidden"
+      class="fixed bottom-0 z-50 flex w-full items-center justify-evenly border-t border-outline-variant/10 bg-slate-950/80 py-4 backdrop-blur-xl lg:hidden"
     >
       <a class="nav-link mobile-nav-link flex flex-col items-center gap-1 text-slate-400 transition-colors duration-200" data-nav-target="home" href="#home">
         <span class="material-symbols-outlined">home</span>
@@ -987,6 +1135,10 @@
       <a class="nav-link mobile-nav-link flex flex-col items-center gap-1 text-slate-400 transition-colors duration-200" data-nav-target="experience" href="#experience">
         <span class="material-symbols-outlined">timeline</span>
         <span class="font-label text-[8px] uppercase">History</span>
+      </a>
+      <a class="nav-link mobile-nav-link flex flex-col items-center gap-1 text-slate-400 transition-colors duration-200" data-nav-target="agents" href="#agents">
+        <span class="material-symbols-outlined">smart_toy</span>
+        <span class="font-label text-[8px] uppercase">Agents</span>
       </a>
       <a class="nav-link mobile-nav-link flex flex-col items-center gap-1 text-slate-400 transition-colors duration-200" data-nav-target="projects" href="#projects">
         <span class="material-symbols-outlined">terminal</span>
