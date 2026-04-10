@@ -157,9 +157,92 @@
       .mobile-nav-link.active {
         color: #a1faff;
       }
+
+      .desktop-sidebar {
+        transition:
+          width 220ms ease,
+          padding 220ms ease,
+          background-color 220ms ease;
+      }
+
+      .desktop-main {
+        transition: padding-left 220ms ease;
+      }
+
+      .sidebar-copy,
+      .sidebar-link-label,
+      .sidebar-live-label,
+      .sidebar-toggle-label {
+        transition:
+          opacity 180ms ease,
+          transform 180ms ease;
+      }
+
+      .sidebar-toggle-button {
+        transition:
+          background-color 180ms ease,
+          color 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .sidebar-toggle-button:hover {
+        background: rgba(30, 41, 59, 0.55);
+        color: #a1faff;
+        border-color: rgba(161, 250, 255, 0.18);
+      }
+
+      @media (min-width: 1024px) {
+        body[data-sidebar-state="expanded"] .desktop-sidebar {
+          width: 16rem;
+        }
+
+        body[data-sidebar-state="collapsed"] .desktop-sidebar {
+          width: 5.5rem;
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+        }
+
+        body[data-sidebar-state="expanded"] .desktop-main {
+          padding-left: 16rem;
+        }
+
+        body[data-sidebar-state="collapsed"] .desktop-main {
+          padding-left: 5.5rem;
+        }
+
+        body[data-sidebar-state="collapsed"] .sidebar-copy,
+        body[data-sidebar-state="collapsed"] .sidebar-link-label,
+        body[data-sidebar-state="collapsed"] .sidebar-live-label,
+        body[data-sidebar-state="collapsed"] .sidebar-toggle-label {
+          opacity: 0;
+          transform: translateX(-4px);
+          pointer-events: none;
+          width: 0;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        body[data-sidebar-state="collapsed"] .sidebar-top-row {
+          justify-content: center;
+        }
+
+        body[data-sidebar-state="collapsed"] .sidebar-top-profile {
+          justify-content: center;
+        }
+
+        body[data-sidebar-state="collapsed"] .side-nav-link {
+          justify-content: center;
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+        }
+
+        body[data-sidebar-state="collapsed"] .sidebar-bottom-row {
+          justify-content: center;
+        }
+      }
     </style>
   </head>
-  <body class="selection:bg-primary selection:text-black">
+  <body class="selection:bg-primary selection:text-black" data-sidebar-state="expanded">
     <nav
       class="fixed top-0 z-50 flex w-full max-w-full items-center justify-between bg-slate-950/70 px-6 py-4 shadow-[0_0_40px_rgba(0,245,255,0.04)] backdrop-blur-xl md:px-8"
     >
@@ -184,48 +267,62 @@
     </nav>
 
     <aside
-      class="fixed left-0 top-0 z-40 hidden h-full w-20 flex-col gap-8 border-r border-outline-variant/10 bg-slate-950/80 px-4 py-24 backdrop-blur-lg lg:flex xl:w-64"
+      class="desktop-sidebar fixed left-0 top-0 z-40 hidden h-full flex-col gap-8 border-r border-outline-variant/10 bg-slate-950/80 px-4 py-24 backdrop-blur-lg lg:flex"
     >
-      <div class="mb-8 flex flex-col items-center gap-4 px-2 xl:items-start xl:px-4">
-        <div class="grid h-12 w-12 place-items-center rounded-xl border border-primary/20 bg-surface-container-highest text-lg font-headline font-bold text-primary">
-          PS
-        </div>
-        <div class="hidden xl:block">
-          <p class="font-headline text-lg font-bold uppercase leading-tight text-on-surface">Backend Developer</p>
-          <p class="font-body text-xs uppercase tracking-[0.24em] text-on-surface-variant">Chatbot / AICC / Android</p>
+      <div class="mb-8 flex flex-col gap-4 px-2 xl:px-4">
+        <div class="sidebar-top-row flex items-center justify-between gap-3">
+          <div class="sidebar-top-profile flex min-w-0 items-center gap-4">
+            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-primary/20 bg-surface-container-highest text-lg font-headline font-bold text-primary">
+              PS
+            </div>
+            <div class="sidebar-copy min-w-0">
+              <p class="font-headline text-lg font-bold uppercase leading-tight text-on-surface">Backend Developer</p>
+              <p class="font-body text-xs uppercase tracking-[0.24em] text-on-surface-variant">Chatbot / AICC / Android</p>
+            </div>
+          </div>
+          <button
+            id="sidebar-toggle"
+            class="sidebar-toggle-button inline-flex shrink-0 items-center gap-2 rounded-lg border border-outline-variant/20 bg-slate-900/40 px-3 py-2 text-slate-400"
+            type="button"
+            aria-label="Toggle side menu"
+            aria-expanded="true"
+          >
+            <span id="sidebar-toggle-icon" class="material-symbols-outlined text-base">left_panel_close</span>
+            <span class="sidebar-toggle-label font-label text-[10px] uppercase tracking-[0.2em]">Collapse</span>
+          </button>
         </div>
       </div>
 
       <nav class="flex flex-col gap-2">
         <a class="nav-link side-nav-link flex items-center gap-4 rounded-lg border-r-2 border-transparent px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" data-nav-target="home" href="#home">
           <span class="material-symbols-outlined">dashboard</span>
-          <span class="hidden font-label text-sm uppercase tracking-widest xl:block">Overview</span>
+          <span class="sidebar-link-label font-label text-sm uppercase tracking-widest">Overview</span>
         </a>
         <a class="nav-link side-nav-link flex items-center gap-4 rounded-lg border-r-2 border-transparent px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" data-nav-target="experience" href="#experience">
           <span class="material-symbols-outlined">timeline</span>
-          <span class="hidden font-label text-sm uppercase tracking-widest xl:block">Timeline</span>
+          <span class="sidebar-link-label font-label text-sm uppercase tracking-widest">Timeline</span>
         </a>
         <a class="nav-link side-nav-link flex items-center gap-4 rounded-lg border-r-2 border-transparent px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" data-nav-target="projects" href="#projects">
           <span class="material-symbols-outlined">terminal</span>
-          <span class="hidden font-label text-sm uppercase tracking-widest xl:block">Archive</span>
+          <span class="sidebar-link-label font-label text-sm uppercase tracking-widest">Archive</span>
         </a>
         <a class="nav-link side-nav-link flex items-center gap-4 rounded-lg border-r-2 border-transparent px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" data-nav-target="stacks" href="#stacks">
           <span class="material-symbols-outlined">memory</span>
-          <span class="hidden font-label text-sm uppercase tracking-widest xl:block">Stacks</span>
+          <span class="sidebar-link-label font-label text-sm uppercase tracking-widest">Stacks</span>
         </a>
         <a class="nav-link side-nav-link flex items-center gap-4 rounded-lg border-r-2 border-transparent px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" data-nav-target="contact" href="#contact">
           <span class="material-symbols-outlined">mail</span>
-          <span class="hidden font-label text-sm uppercase tracking-widest xl:block">Contact</span>
+          <span class="sidebar-link-label font-label text-sm uppercase tracking-widest">Contact</span>
         </a>
       </nav>
 
-      <div class="mt-auto flex items-center gap-3 px-2 xl:px-4">
+      <div class="sidebar-bottom-row mt-auto flex items-center gap-3 px-2 xl:px-4">
         <div class="signal-dot h-2 w-2 rounded-full bg-primary animate-pulse"></div>
-        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Career Live</span>
+        <span class="sidebar-live-label font-label text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Career Live</span>
       </div>
     </aside>
 
-    <main class="pb-24 pt-20 lg:pl-20 xl:pl-64">
+    <main class="desktop-main pb-24 pt-20 lg:pl-20 xl:pl-64">
       <section class="hero-gradient relative flex min-h-screen flex-col justify-center overflow-hidden px-8 md:px-16" id="home">
         <div class="max-w-5xl">
           <div class="mb-6 inline-flex items-center gap-2 rounded-md border border-outline-variant/30 bg-surface-container-highest px-3 py-1">
@@ -886,6 +983,9 @@
     <script>
       (() => {
         const careerStartDate = new Date("2021-07-01T00:00:00+09:00");
+        const sidebarToggle = document.getElementById("sidebar-toggle");
+        const sidebarToggleIcon = document.getElementById("sidebar-toggle-icon");
+        const sidebarStorageKey = "parksy-sidebar-state";
 
         const formatCareerDuration = () => {
           const today = new Date();
@@ -917,6 +1017,49 @@
 
         document.querySelectorAll("[data-career-duration]").forEach((element) => {
           element.textContent = formatCareerDuration();
+        });
+
+        const applySidebarState = (state) => {
+          const normalizedState = state === "collapsed" ? "collapsed" : "expanded";
+          document.body.dataset.sidebarState = normalizedState;
+
+          if (sidebarToggle) {
+            const isExpanded = normalizedState === "expanded";
+            sidebarToggle.setAttribute("aria-expanded", String(isExpanded));
+            sidebarToggle.setAttribute("aria-label", isExpanded ? "Collapse side menu" : "Expand side menu");
+          }
+
+          if (sidebarToggleIcon) {
+            sidebarToggleIcon.textContent =
+              normalizedState === "expanded" ? "left_panel_close" : "left_panel_open";
+          }
+
+          const toggleLabel = sidebarToggle?.querySelector(".sidebar-toggle-label");
+          if (toggleLabel) {
+            toggleLabel.textContent = normalizedState === "expanded" ? "Collapse" : "Expand";
+          }
+        };
+
+        const getDefaultSidebarState = () =>
+          window.matchMedia("(min-width: 1280px)").matches ? "expanded" : "collapsed";
+
+        try {
+          const savedSidebarState = localStorage.getItem(sidebarStorageKey);
+          applySidebarState(savedSidebarState || getDefaultSidebarState());
+        } catch (error) {
+          applySidebarState(getDefaultSidebarState());
+        }
+
+        sidebarToggle?.addEventListener("click", () => {
+          const nextState =
+            document.body.dataset.sidebarState === "collapsed" ? "expanded" : "collapsed";
+          applySidebarState(nextState);
+
+          try {
+            localStorage.setItem(sidebarStorageKey, nextState);
+          } catch (error) {
+            // Ignore storage failures and keep the current session state only.
+          }
         });
 
         const navLinks = Array.from(document.querySelectorAll(".nav-link[data-nav-target]"));
