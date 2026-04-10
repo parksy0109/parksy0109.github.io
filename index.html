@@ -171,21 +171,36 @@
 
       .sidebar-copy,
       .sidebar-link-label,
-      .sidebar-live-label,
-      .sidebar-toggle-label {
+      .sidebar-live-label {
         transition:
           opacity 180ms ease,
           transform 180ms ease;
       }
 
-      .sidebar-toggle-button {
+      .sidebar-edge-toggle {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        z-index: 20;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 9999px;
+        transform: translate(50%, -50%);
+        border: 1px solid rgba(68, 72, 79, 0.28);
+        background: rgba(15, 20, 26, 0.92);
+        color: #a8abb3;
+        box-shadow: 0 0 18px rgba(0, 229, 238, 0.12);
         transition:
           background-color 180ms ease,
           color 180ms ease,
-          border-color 180ms ease;
+          border-color 180ms ease,
+          transform 180ms ease;
       }
 
-      .sidebar-toggle-button:hover {
+      .sidebar-edge-toggle:hover {
         background: rgba(30, 41, 59, 0.55);
         color: #a1faff;
         border-color: rgba(161, 250, 255, 0.18);
@@ -212,8 +227,7 @@
 
         body[data-sidebar-state="collapsed"] .sidebar-copy,
         body[data-sidebar-state="collapsed"] .sidebar-link-label,
-        body[data-sidebar-state="collapsed"] .sidebar-live-label,
-        body[data-sidebar-state="collapsed"] .sidebar-toggle-label {
+        body[data-sidebar-state="collapsed"] .sidebar-live-label {
           opacity: 0;
           transform: translateX(-4px);
           pointer-events: none;
@@ -270,7 +284,7 @@
       class="desktop-sidebar fixed left-0 top-0 z-40 hidden h-full flex-col gap-8 border-r border-outline-variant/10 bg-slate-950/80 px-4 py-24 backdrop-blur-lg lg:flex"
     >
       <div class="mb-8 flex flex-col gap-4 px-2 xl:px-4">
-        <div class="sidebar-top-row flex items-center justify-between gap-3">
+        <div class="sidebar-top-row flex items-center gap-3">
           <div class="sidebar-top-profile flex min-w-0 items-center gap-4">
             <div class="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-primary/20 bg-surface-container-highest text-lg font-headline font-bold text-primary">
               PS
@@ -280,16 +294,6 @@
               <p class="font-body text-xs uppercase tracking-[0.24em] text-on-surface-variant">Chatbot / AICC / Android</p>
             </div>
           </div>
-          <button
-            id="sidebar-toggle"
-            class="sidebar-toggle-button inline-flex shrink-0 items-center gap-2 rounded-lg border border-outline-variant/20 bg-slate-900/40 px-3 py-2 text-slate-400"
-            type="button"
-            aria-label="Toggle side menu"
-            aria-expanded="true"
-          >
-            <span id="sidebar-toggle-icon" class="material-symbols-outlined text-base">left_panel_close</span>
-            <span class="sidebar-toggle-label font-label text-[10px] uppercase tracking-[0.2em]">Collapse</span>
-          </button>
         </div>
       </div>
 
@@ -320,6 +324,16 @@
         <div class="signal-dot h-2 w-2 rounded-full bg-primary animate-pulse"></div>
         <span class="sidebar-live-label font-label text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Career Live</span>
       </div>
+
+      <button
+        id="sidebar-toggle"
+        class="sidebar-edge-toggle"
+        type="button"
+        aria-label="Collapse side menu"
+        aria-expanded="true"
+      >
+        <span id="sidebar-toggle-icon" class="material-symbols-outlined text-base">chevron_left</span>
+      </button>
     </aside>
 
     <main class="desktop-main pb-24 pt-20 lg:pl-20 xl:pl-64">
@@ -1031,12 +1045,7 @@
 
           if (sidebarToggleIcon) {
             sidebarToggleIcon.textContent =
-              normalizedState === "expanded" ? "left_panel_close" : "left_panel_open";
-          }
-
-          const toggleLabel = sidebarToggle?.querySelector(".sidebar-toggle-label");
-          if (toggleLabel) {
-            toggleLabel.textContent = normalizedState === "expanded" ? "Collapse" : "Expand";
+              normalizedState === "expanded" ? "chevron_left" : "chevron_right";
           }
         };
 
