@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="neon-stroke" x1="16" y1="14" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A1FAFF"/>
+      <stop offset="0.55" stop-color="#69E9FF"/>
+      <stop offset="1" stop-color="#D575FF"/>
+    </linearGradient>
+    <radialGradient id="neon-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(46 18) rotate(90) scale(16)">
+      <stop stop-color="#A1FAFF" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#A1FAFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="18" fill="#0A0E14"/>
+  <rect x="2.5" y="2.5" width="59" height="59" rx="15.5" stroke="url(#neon-stroke)" stroke-opacity="0.35"/>
+  <circle cx="46" cy="18" r="16" fill="url(#neon-glow)"/>
+
+  <path
+    fill="url(#neon-stroke)"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M20 12C17.7909 12 16 13.7909 16 16V48C16 50.2091 17.7909 52 20 52C22.2091 52 24 50.2091 24 48V38H35C42.732 38 48 32.732 48 25C48 17.268 42.732 12 35 12H20ZM24 18V32H34.5C38.183 32 40.5 29.3137 40.5 25C40.5 20.6863 38.183 18 34.5 18H24Z"
+  />
+
+  <circle cx="44.5" cy="45.5" r="8" fill="#D575FF" opacity="0.15"/>
+  <circle cx="44.5" cy="45.5" r="4.5" fill="#D575FF"/>
+</svg>
