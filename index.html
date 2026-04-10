@@ -1,571 +1,857 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html class="dark" lang="ko">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>박수용 | Backend Developer Portfolio</title>
     <meta
       name="description"
-      content="박수용의 백엔드 중심 포트폴리오. Spring Boot, Java, React, Kotlin 기반의 챗봇, AICC, 메시징 플랫폼, Android 실무 경험을 소개합니다."
+      content="박수용의 포트폴리오. 백엔드 중심 4년 6개월 경력, 챗봇·AICC·메시징 플랫폼·OpenAI 연동, React와 Android까지 이어지는 실무 경험을 정리했습니다."
     />
+    <meta
+      name="keywords"
+      content="박수용, 백엔드 개발자, Spring Boot, Java, React, Kotlin, 챗봇, AICC, OpenAI, Android"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#f1f3fc",
+              "on-tertiary": "#003053",
+              tertiary: "#64b3ff",
+              "surface-dim": "#0a0e14",
+              secondary: "#d575ff",
+              surface: "#0a0e14",
+              background: "#0a0e14",
+              error: "#ff716c",
+              "surface-container-highest": "#20262f",
+              "surface-bright": "#262c36",
+              "surface-variant": "#20262f",
+              "surface-container": "#151a21",
+              "surface-container-low": "#0f141a",
+              "surface-container-high": "#1b2028",
+              "surface-container-lowest": "#000000",
+              "on-surface-variant": "#a8abb3",
+              primary: "#a1faff",
+              "primary-container": "#00f4fe",
+              "primary-dim": "#00e5ee",
+              outline: "#72757d",
+              "outline-variant": "#44484f",
+            },
+            borderRadius: {
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            fontFamily: {
+              headline: ["Space Grotesk", "sans-serif"],
+              body: ["Inter", "sans-serif"],
+              label: ["Space Grotesk", "sans-serif"],
+            },
+            boxShadow: {
+              neon: "0 0 40px rgba(0, 229, 238, 0.08)",
+              pulse: "0 0 22px rgba(161, 250, 255, 0.24)",
+            },
+          },
+        },
+      };
+    </script>
     <style>
-      :root {
-        --bg: #f2ede4;
-        --paper: rgba(255, 252, 247, 0.84);
-        --ink: #1f1d1a;
-        --muted: #62584b;
-        --line: rgba(31, 29, 26, 0.12);
-        --accent: #b5512f;
-        --accent-soft: rgba(181, 81, 47, 0.12);
-        --accent-deep: #7f3118;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
       }
 
       body {
-        margin: 0;
-        font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
-        color: var(--ink);
         background:
-          radial-gradient(circle at top left, rgba(214, 170, 104, 0.28), transparent 34%),
-          radial-gradient(circle at right 20%, rgba(181, 81, 47, 0.16), transparent 26%),
-          linear-gradient(180deg, #f8f3eb 0%, #ede4d7 100%);
+          radial-gradient(circle at 15% 10%, rgba(161, 250, 255, 0.06), transparent 24%),
+          radial-gradient(circle at 85% 12%, rgba(213, 117, 255, 0.08), transparent 22%),
+          #0a0e14;
+        color: #f1f3fc;
+        font-family: "Inter", sans-serif;
       }
 
-      a {
-        color: inherit;
+      .hero-gradient {
+        background:
+          radial-gradient(circle at 45% 30%, rgba(161, 250, 255, 0.06) 0%, transparent 34%),
+          radial-gradient(circle at 90% 70%, rgba(213, 117, 255, 0.08) 0%, transparent 26%),
+          #0a0e14;
       }
 
-      .shell {
-        width: min(1120px, calc(100% - 32px));
-        margin: 0 auto;
-        padding: 24px 0 64px;
+      .glass-panel {
+        background: rgba(21, 26, 33, 0.72);
+        backdrop-filter: blur(20px);
       }
 
-      .nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-        padding: 16px 0 24px;
+      .ghost-border {
+        border: 1px solid rgba(68, 72, 79, 0.18);
       }
 
-      .brand {
-        font-size: 0.95rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+      .project-shell {
+        background:
+          linear-gradient(180deg, rgba(21, 26, 33, 0.96), rgba(15, 20, 26, 0.98));
+        transition:
+          transform 220ms ease,
+          background-color 220ms ease,
+          border-color 220ms ease,
+          box-shadow 220ms ease;
       }
 
-      .nav-links {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-        color: var(--muted);
-        font-size: 0.95rem;
+      .project-shell:hover {
+        transform: translateY(-4px);
+        background: linear-gradient(180deg, rgba(27, 32, 40, 0.98), rgba(21, 26, 33, 1));
+        border-color: rgba(213, 117, 255, 0.25);
+        box-shadow: 0 0 40px rgba(213, 117, 255, 0.08);
       }
 
-      .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
-        gap: 24px;
-        align-items: stretch;
+      .project-art {
+        position: absolute;
+        inset: 0;
+        opacity: 0.55;
+        pointer-events: none;
       }
 
-      .panel {
-        background: var(--paper);
-        border: 1px solid var(--line);
-        border-radius: 28px;
-        box-shadow: 0 14px 40px rgba(49, 34, 18, 0.08);
-        backdrop-filter: blur(14px);
+      .project-art::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(10, 14, 20, 0.02), rgba(10, 14, 20, 0.9));
       }
 
-      .hero-main {
-        padding: 40px;
+      .line-grid {
+        background-image:
+          linear-gradient(rgba(161, 250, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(161, 250, 255, 0.06) 1px, transparent 1px);
+        background-size: 22px 22px;
       }
 
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        border-radius: 999px;
-        background: var(--accent-soft);
-        color: var(--accent-deep);
-        font-size: 0.9rem;
-        font-weight: 700;
+      .signal-dot {
+        box-shadow: 0 0 14px rgba(161, 250, 255, 0.8);
       }
 
-      h1,
-      h2,
-      h3,
-      p {
-        margin: 0;
-      }
-
-      h1 {
-        margin-top: 18px;
-        font-size: clamp(2.5rem, 5vw, 5rem);
-        line-height: 0.95;
-        letter-spacing: -0.05em;
-      }
-
-      .subtitle {
-        margin-top: 18px;
-        max-width: 650px;
-        font-size: 1.08rem;
-        line-height: 1.75;
-        color: var(--muted);
-      }
-
-      .cta-row {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-top: 24px;
-      }
-
-      .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 18px;
-        border-radius: 999px;
-        text-decoration: none;
-        font-weight: 700;
-        transition: transform 0.2s ease, background 0.2s ease;
-      }
-
-      .button:hover {
-        transform: translateY(-1px);
-      }
-
-      .button-primary {
-        background: var(--accent);
-        color: #fffaf5;
-      }
-
-      .button-secondary {
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.6);
-      }
-
-      .hero-side {
-        padding: 28px;
-        display: grid;
-        gap: 14px;
-      }
-
-      .stat {
-        padding: 18px 20px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.72);
-        border: 1px solid rgba(31, 29, 26, 0.08);
-      }
-
-      .stat-label {
-        color: var(--muted);
-        font-size: 0.88rem;
-      }
-
-      .stat-value {
-        margin-top: 8px;
-        font-size: 1.45rem;
-        font-weight: 800;
-        letter-spacing: -0.04em;
-      }
-
-      .section {
-        margin-top: 24px;
-        padding: 30px;
-      }
-
-      .section-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-        gap: 16px;
-        margin-bottom: 22px;
-      }
-
-      .section-head p {
-        color: var(--muted);
-        max-width: 640px;
-        line-height: 1.7;
-      }
-
-      .section-title {
-        font-size: clamp(1.5rem, 2vw, 2.2rem);
-        letter-spacing: -0.04em;
-      }
-
-      .chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .chip {
-        padding: 10px 14px;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.7);
-        font-size: 0.94rem;
-        font-weight: 600;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-      }
-
-      .card {
-        padding: 22px;
-        border-radius: 24px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.66);
-      }
-
-      .card h3 {
-        font-size: 1.15rem;
-        line-height: 1.4;
-      }
-
-      .meta {
-        margin-top: 8px;
-        font-size: 0.92rem;
-        color: var(--muted);
-      }
-
-      .card p {
-        margin-top: 14px;
-        line-height: 1.75;
-        color: var(--muted);
-      }
-
-      .timeline {
-        display: grid;
-        gap: 14px;
-      }
-
-      .timeline-item {
-        display: grid;
-        grid-template-columns: 180px 1fr;
-        gap: 18px;
-        padding: 20px;
-        border-radius: 22px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.7);
-      }
-
-      .timeline-date {
-        font-size: 0.92rem;
-        color: var(--muted);
-        font-weight: 700;
-      }
-
-      .timeline-role {
-        font-size: 1.05rem;
-        font-weight: 800;
-      }
-
-      .timeline-copy {
-        margin-top: 8px;
-        color: var(--muted);
-        line-height: 1.7;
-      }
-
-      .contact {
-        display: flex;
-        justify-content: space-between;
-        gap: 18px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-
-      .contact-links {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-
-      footer {
-        padding: 24px 0 0;
-        color: var(--muted);
-        font-size: 0.92rem;
-      }
-
-      @media (max-width: 900px) {
-        .hero,
-        .grid {
-          grid-template-columns: 1fr;
-        }
-
-        .timeline-item {
-          grid-template-columns: 1fr;
-        }
-
-        .hero-main,
-        .hero-side,
-        .section {
-          padding: 24px;
-        }
-      }
-
-      @media (max-width: 640px) {
-        .shell {
-          width: min(100% - 20px, 1120px);
-          padding-top: 12px;
-        }
-
-        .nav {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        h1 {
-          font-size: 2.6rem;
-        }
+      .stack-line {
+        height: 1px;
+        background: linear-gradient(90deg, rgba(161, 250, 255, 0.8), rgba(213, 117, 255, 0.08));
       }
     </style>
   </head>
-  <body>
-    <div class="shell">
-      <header class="nav">
-        <div class="brand">Park SooYong</div>
-        <nav class="nav-links">
-          <a href="#summary">Summary</a>
-          <a href="#stack">Stack</a>
-          <a href="#projects">Projects</a>
-          <a href="#career">Career</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </header>
+  <body class="selection:bg-primary selection:text-black">
+    <nav
+      class="fixed top-0 z-50 flex w-full max-w-full items-center justify-between bg-slate-950/70 px-6 py-4 shadow-[0_0_40px_rgba(0,245,255,0.04)] backdrop-blur-xl md:px-8"
+    >
+      <a class="font-headline text-xl font-bold uppercase tracking-tight text-cyan-400" href="#home">
+        PARK DOSSIER
+      </a>
+      <div class="hidden items-center gap-8 md:flex">
+        <a class="border-b-2 border-purple-500 pb-1 font-['Space_Grotesk'] tracking-tight text-cyan-400 transition-all duration-300" href="#home">Home</a>
+        <a class="rounded px-2 py-1 font-['Space_Grotesk'] tracking-tight text-slate-400 transition-all duration-300 hover:bg-slate-800/50 hover:text-cyan-300" href="#experience">Experience</a>
+        <a class="rounded px-2 py-1 font-['Space_Grotesk'] tracking-tight text-slate-400 transition-all duration-300 hover:bg-slate-800/50 hover:text-cyan-300" href="#projects">Projects</a>
+        <a class="rounded px-2 py-1 font-['Space_Grotesk'] tracking-tight text-slate-400 transition-all duration-300 hover:bg-slate-800/50 hover:text-cyan-300" href="#stacks">Stacks</a>
+      </div>
+      <a
+        class="rounded-full bg-gradient-to-br from-primary to-primary-container px-5 py-2 font-headline text-sm font-bold text-black transition-all active:scale-95 md:px-6"
+        href="https://github.com/parksy0109"
+        target="_blank"
+        rel="noreferrer"
+      >
+        GitHub
+      </a>
+    </nav>
 
-      <main>
-        <section class="hero">
-          <article class="panel hero-main">
-            <div class="eyebrow">Backend Developer • React • Android</div>
-            <h1>박수용</h1>
-            <p class="subtitle">
-              Spring Boot, Java, MySQL을 중심으로 챗봇, AICC, 메시징 플랫폼을
-              개발해온 백엔드 개발자입니다. React 프론트엔드와 Kotlin/Android
-              작업까지 이어서 대응하며, 서비스 연동부터 운영 배포까지 실무 흐름을
-              경험했습니다.
-            </p>
-            <div class="cta-row">
-              <a class="button button-primary" href="#projects">대표 프로젝트 보기</a>
-              <a class="button button-secondary" href="https://github.com/parksy0109" target="_blank" rel="noreferrer">GitHub</a>
-              <a class="button button-secondary" href="mailto:kalnalvid@gmail.com">Email</a>
-            </div>
-          </article>
+    <aside
+      class="fixed left-0 top-0 z-40 hidden h-full w-20 flex-col gap-8 border-r border-outline-variant/10 bg-slate-950/80 px-4 py-24 backdrop-blur-lg lg:flex xl:w-64"
+    >
+      <div class="mb-8 flex flex-col items-center gap-4 px-2 xl:items-start xl:px-4">
+        <div class="grid h-12 w-12 place-items-center rounded-xl border border-primary/20 bg-surface-container-highest text-lg font-headline font-bold text-primary">
+          PS
+        </div>
+        <div class="hidden xl:block">
+          <p class="font-headline text-lg font-bold uppercase leading-tight text-on-surface">Backend Developer</p>
+          <p class="font-body text-xs uppercase tracking-[0.24em] text-on-surface-variant">Chatbot / AICC / Android</p>
+        </div>
+      </div>
 
-          <aside class="panel hero-side">
-            <div class="stat">
-              <div class="stat-label">Career</div>
-              <div class="stat-value">약 4년 6개월</div>
-            </div>
-            <div class="stat">
-              <div class="stat-label">Core Stack</div>
-              <div class="stat-value">Java · Spring Boot · MySQL</div>
-            </div>
-            <div class="stat">
-              <div class="stat-label">Domain</div>
-              <div class="stat-value">Chatbot · AICC · Messaging · OpenAI</div>
-            </div>
-          </aside>
-        </section>
+      <nav class="flex flex-col gap-2">
+        <a class="flex items-center gap-4 rounded-lg border-r-2 border-cyan-400 bg-cyan-900/20 px-4 py-3 text-cyan-400 transition-all duration-200" href="#home">
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="hidden font-label text-sm uppercase tracking-widest xl:block">Overview</span>
+        </a>
+        <a class="flex items-center gap-4 rounded-lg px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" href="#experience">
+          <span class="material-symbols-outlined">timeline</span>
+          <span class="hidden font-label text-sm uppercase tracking-widest xl:block">Timeline</span>
+        </a>
+        <a class="flex items-center gap-4 rounded-lg px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" href="#projects">
+          <span class="material-symbols-outlined">terminal</span>
+          <span class="hidden font-label text-sm uppercase tracking-widest xl:block">Archive</span>
+        </a>
+        <a class="flex items-center gap-4 rounded-lg px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" href="#stacks">
+          <span class="material-symbols-outlined">memory</span>
+          <span class="hidden font-label text-sm uppercase tracking-widest xl:block">Stacks</span>
+        </a>
+        <a class="flex items-center gap-4 rounded-lg px-4 py-3 text-slate-500 transition-all duration-200 hover:bg-slate-800/40 hover:text-purple-400" href="#contact">
+          <span class="material-symbols-outlined">mail</span>
+          <span class="hidden font-label text-sm uppercase tracking-widest xl:block">Contact</span>
+        </a>
+      </nav>
 
-        <section id="summary" class="panel section">
-          <div class="section-head">
+      <div class="mt-auto flex items-center gap-3 px-2 xl:px-4">
+        <div class="signal-dot h-2 w-2 rounded-full bg-primary animate-pulse"></div>
+        <span class="font-label text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Career Live</span>
+      </div>
+    </aside>
+
+    <main class="pb-24 pt-20 lg:pl-20 xl:pl-64">
+      <section class="hero-gradient relative flex min-h-screen flex-col justify-center overflow-hidden px-8 md:px-16" id="home">
+        <div class="max-w-5xl">
+          <div class="mb-6 inline-flex items-center gap-2 rounded-md border border-outline-variant/30 bg-surface-container-highest px-3 py-1">
+            <span class="h-2 w-2 rounded-full bg-secondary"></span>
+            <span class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">Status: Career dossier online</span>
+          </div>
+
+          <h1 class="mb-6 max-w-5xl font-headline text-5xl font-bold tracking-tighter text-on-surface md:text-8xl">
+            Building <span class="text-primary">Chatbot</span>, <span class="text-secondary">AICC</span>, and
+            Backend Systems with Range.
+          </h1>
+
+          <div class="grid max-w-5xl gap-8 lg:grid-cols-[minmax(0,1.2fr)_320px]">
+            <div class="rounded-2xl border border-outline-variant/20 bg-surface-container p-6 shadow-2xl">
+              <div class="mb-4 flex gap-1.5">
+                <div class="h-3 w-3 rounded-full bg-red-500/50"></div>
+                <div class="h-3 w-3 rounded-full bg-yellow-500/50"></div>
+                <div class="h-3 w-3 rounded-full bg-green-500/50"></div>
+              </div>
+              <div class="space-y-3 font-mono text-sm md:text-base">
+                <p class="text-on-surface-variant"><span class="text-primary">guest@parksy:</span><span class="text-secondary">~</span>$ cat profile.md</p>
+                <p class="leading-7 text-on-surface">
+                  백엔드 중심 4년 6개월 경력. Spring Boot, Java, MySQL을 중심으로 챗봇,
+                  콜봇, AICC, 메시징 플랫폼, OpenAI 연동 프로젝트를 수행했습니다.
+                  React 프론트엔드와 Android/Kotlin까지 연결해 구현, 연동, 운영 배포,
+                  협업 조율까지 다룹니다.
+                </p>
+                <p class="text-on-surface-variant"><span class="text-primary">guest@parksy:</span><span class="text-secondary">~</span>$ ls scope/</p>
+                <p class="leading-7 text-on-surface">
+                  backend&nbsp;&nbsp;frontend&nbsp;&nbsp;android&nbsp;&nbsp;ai-integration&nbsp;&nbsp;deployment
+                </p>
+                <p class="text-on-surface-variant"><span class="text-primary">guest@parksy:</span><span class="text-secondary">~</span>$ <span class="animate-pulse">_</span></p>
+              </div>
+              <div class="mt-8 flex flex-wrap gap-4">
+                <a
+                  class="rounded-full bg-gradient-to-br from-primary to-primary-container px-8 py-4 font-headline font-bold text-black shadow-[0_0_30px_rgba(161,250,255,0.18)] transition-transform active:scale-95"
+                  href="#projects"
+                >
+                  Explore Archive
+                </a>
+                <a
+                  class="rounded-full border border-outline-variant/30 px-8 py-4 font-headline font-bold text-primary transition-all hover:bg-primary/5"
+                  href="#contact"
+                >
+                  Contact
+                </a>
+              </div>
+            </div>
+
+            <div class="glass-panel ghost-border rounded-2xl p-6 shadow-neon">
+              <p class="font-label text-[10px] uppercase tracking-[0.24em] text-secondary">Snapshot</p>
+              <div class="mt-5 space-y-5">
+                <div>
+                  <p class="font-label text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Career</p>
+                  <p class="mt-2 font-headline text-3xl font-bold tracking-tight text-on-surface">약 4년 6개월</p>
+                </div>
+                <div>
+                  <p class="font-label text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Roles</p>
+                  <p class="mt-2 text-sm leading-7 text-on-surface-variant">Backend, Frontend, Android, AI Integration, Delivery</p>
+                </div>
+                <div>
+                  <p class="font-label text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Archive Counts</p>
+                  <p class="mt-2 text-sm leading-7 text-on-surface-variant">재직 이력 5개 · 회사 프로젝트 8개 · 개인/학교 프로젝트 4개</p>
+                </div>
+                <div>
+                  <p class="font-label text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Core Stack</p>
+                  <p class="mt-2 text-sm leading-7 text-on-surface-variant">Java, Spring Boot, MySQL, React, Kotlin, Android, OpenAI API</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute -right-20 top-1/4 h-96 w-96 rounded-full bg-secondary/10 blur-[120px]"></div>
+        <div class="pointer-events-none absolute bottom-10 right-10 hidden select-none opacity-10 md:block">
+          <span class="font-headline text-[20rem] font-bold leading-none tracking-tighter">01</span>
+        </div>
+      </section>
+
+      <section class="bg-surface px-8 py-32 md:px-16" id="experience">
+        <div class="mx-auto max-w-6xl">
+          <div class="mb-16 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <h2 class="section-title">Summary</h2>
+              <p class="mb-2 font-label text-sm uppercase tracking-[0.3em] text-secondary">History</p>
+              <h2 class="font-headline text-4xl font-bold text-on-surface md:text-5xl">Career Evolution</h2>
             </div>
-            <p>
-              인포뱅크에서 백엔드와 안드로이드, 이후 프론트엔드까지 역할을 확장해
-              왔습니다. REST API 설계, 외부 연동, 커스텀 UI 연결, 운영 환경 구성,
-              협업 도구 기반 이슈 처리까지 실무형 개발 흐름에 익숙합니다.
-            </p>
+            <div class="max-w-sm text-sm font-body text-on-surface-variant md:text-right">
+              인포뱅크에서 인턴부터 시작해 안드로이드, 백엔드, 프론트엔드까지 역할을
+              확장해온 흐름을 시간축으로 정리했습니다.
+            </div>
           </div>
-          <div class="chips">
-            <span class="chip">Spring Boot</span>
-            <span class="chip">Java</span>
-            <span class="chip">MyBatis</span>
-            <span class="chip">Feign</span>
-            <span class="chip">React</span>
-            <span class="chip">Kotlin</span>
-            <span class="chip">Android</span>
-            <span class="chip">OpenAI API</span>
-            <span class="chip">GitLab CI/CD</span>
-            <span class="chip">nginx</span>
-          </div>
-        </section>
 
-        <section id="stack" class="panel section">
-          <div class="section-head">
-            <div>
-              <h2 class="section-title">Tech Stack</h2>
-            </div>
-            <p>
-              도메인에 따라 역할이 달라졌지만, 백엔드를 중심축으로 두고 프론트엔드와
-              안드로이드까지 연결하는 방식으로 경험을 넓혀왔습니다.
-            </p>
-          </div>
-          <div class="grid">
-            <article class="card">
-              <h3>Backend</h3>
-              <p>Java, Spring Boot, MyBatis, Feign, MySQL, PostgreSQL, REST API 설계</p>
-            </article>
-            <article class="card">
-              <h3>Frontend</h3>
-              <p>React, Axios 기반 연동, 커스텀 UI 구성, 퍼블리싱 산출물 반영</p>
-            </article>
-            <article class="card">
-              <h3>Android &amp; AI</h3>
-              <p>Kotlin, Java, Retrofit2, Room, Coroutine, Firebase, OpenAI API, Selenium</p>
-            </article>
-          </div>
-        </section>
+          <div class="relative space-y-12">
+            <div class="absolute bottom-0 left-8 top-0 w-px bg-gradient-to-b from-primary/50 via-secondary/50 to-transparent md:left-1/2 md:-ml-px"></div>
 
-        <section id="projects" class="panel section">
-          <div class="section-head">
-            <div>
-              <h2 class="section-title">Featured Projects</h2>
+            <div class="relative flex flex-col items-start md:flex-row md:items-center">
+              <div class="mb-4 flex flex-col md:mb-0 md:w-1/2 md:pr-16 md:text-right">
+                <span class="mb-1 font-label text-xs text-primary">2025.11 — NOW</span>
+                <h3 class="font-headline text-2xl font-bold text-on-surface">iXpert AIX개발1팀 팀원</h3>
+                <p class="mb-2 text-sm font-label text-secondary">INFOBANK</p>
+                <p class="max-w-md text-sm leading-relaxed text-on-surface-variant md:ml-auto">
+                  프론트엔드와 백엔드 개발을 함께 수행. AJ Networks 카카오 챗봇 등
+                  최신 챗봇 실무를 담당했습니다.
+                </p>
+              </div>
+              <div class="absolute left-8 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-4 border-background bg-primary shadow-pulse md:left-1/2"></div>
+              <div class="hidden md:block md:w-1/2"></div>
             </div>
-            <p>
-              챗봇, 메시징, OpenAI 연동, 안드로이드 라이브러리 개발 경험 중
-              포트폴리오 맥락에서 가장 설명력이 높은 프로젝트를 우선 배치했습니다.
-            </p>
-          </div>
-          <div class="grid">
-            <article class="card">
-              <h3>SK Broadband 챗봇/콜봇 구축</h3>
-              <div class="meta">2025-2026 · Backend / Frontend / Infra</div>
-              <p>
-                SKT AICC Platform 기반 챗봇/콜봇 시스템을 구축하고 고객 요구사항에
-                맞춘 커스터마이징을 담당했습니다. 봇빌더-웹훅 연동 기반 Custom UI,
-                GitLab Runner CI/CD, 카카오 챗봇 연동 경험이 핵심입니다.
-              </p>
-            </article>
-            <article class="card">
-              <h3>SKT AICC 메시징 플랫폼</h3>
-              <div class="meta">2024-2025 · Backend / Frontend</div>
-              <p>
-                도메인 DB 설계, 비즈니스 로직 및 REST API 설계, Feign 기반 외부 서버
-                통신, React 프론트 작업, 빌드·배포 스크립트 작성과 성능 대응을
-                수행했습니다.
-              </p>
-            </article>
-            <article class="card">
-              <h3>AJ Networks 카카오 챗봇</h3>
-              <div class="meta">2026 · Backend</div>
-              <p>
-                카카오 챗봇 스킬과 옵션 플러그인을 활용한 챗봇 구축, 기간계 연동을
-                통한 비즈니스 로직 처리, 상용 환경 구성 작업을 맡았습니다.
-              </p>
-            </article>
-            <article class="card">
-              <h3>OpenAI API 이용 Q&amp;A 연구</h3>
-              <div class="meta">2023 · AI / Backend</div>
-              <p>
-                Feign Client로 OpenAI API를 연동하고, Embedding 결과를 PostgreSQL에
-                저장해 코사인 유사도 기반 질의응답 구조를 연구했습니다.
-              </p>
-            </article>
-            <article class="card">
-              <h3>농협 UMS Android Push Library</h3>
-              <div class="meta">2023-2024 · Android</div>
-              <p>
-                Dagger 기반 의존성 주입, FCM 푸시 수신, Retrofit2 API 통신,
-                암호화 저장 구현을 통해 안드로이드 라이브러리 개발 경험을 쌓았습니다.
-              </p>
-            </article>
-            <article class="card">
-              <h3>maro OpenAI Client</h3>
-              <div class="meta">2023 · Personal Project</div>
-              <p>
-                Spring Boot 프로젝트에서 OpenAI API를 쉽게 사용할 수 있도록 돕는
-                Kotlin 기반 클라이언트 라이브러리를 개인 프로젝트로 만들었습니다.
-              </p>
-            </article>
-          </div>
-        </section>
 
-        <section id="career" class="panel section">
-          <div class="section-head">
-            <div>
-              <h2 class="section-title">Career Timeline</h2>
+            <div class="relative flex flex-col items-start md:flex-row md:items-center">
+              <div class="hidden md:block md:w-1/2"></div>
+              <div class="absolute left-8 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-4 border-background bg-secondary shadow-[0_0_15px_#d575ff] md:left-1/2"></div>
+              <div class="mt-4 flex flex-col md:mt-0 md:w-1/2 md:pl-16">
+                <span class="mb-1 font-label text-xs text-secondary">2024.02 — 2025.11</span>
+                <h3 class="font-headline text-2xl font-bold text-on-surface">iComm AI프로젝트팀 연구원</h3>
+                <p class="mb-2 text-sm font-label text-primary">INFOBANK</p>
+                <p class="max-w-md text-sm leading-relaxed text-on-surface-variant">
+                  프론트엔드와 백엔드 개발 수행. SK Broadband 챗봇/콜봇 구축, SKT AICC
+                  메시징 플랫폼 고도화 프로젝트를 경험했습니다.
+                </p>
+              </div>
             </div>
-            <p>
-              인포뱅크에서 인턴부터 시작해 안드로이드, 백엔드, 프론트엔드를 아우르는
-              방향으로 역할 범위를 넓혀왔습니다.
+
+            <div class="relative flex flex-col items-start md:flex-row md:items-center">
+              <div class="mb-4 flex flex-col md:mb-0 md:w-1/2 md:pr-16 md:text-right">
+                <span class="mb-1 font-label text-xs text-primary">2023.01 — 2024.02</span>
+                <h3 class="font-headline text-2xl font-bold text-on-surface">iTechEx AIaaS 그룹 솔루션팀 연구원</h3>
+                <p class="mb-2 text-sm font-label text-secondary">INFOBANK</p>
+                <p class="max-w-md text-sm leading-relaxed text-on-surface-variant md:ml-auto">
+                  백엔드와 안드로이드 개발 수행. 농협 UMS Push Library, OpenAI Q&amp;A
+                  연구, 결재문서 자동화 프로젝트를 담당했습니다.
+                </p>
+              </div>
+              <div class="absolute left-8 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-4 border-background bg-primary/70 md:left-1/2"></div>
+              <div class="hidden md:block md:w-1/2"></div>
+            </div>
+
+            <div class="relative flex flex-col items-start md:flex-row md:items-center">
+              <div class="hidden md:block md:w-1/2"></div>
+              <div class="absolute left-8 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-4 border-background bg-secondary/80 md:left-1/2"></div>
+              <div class="mt-4 flex flex-col md:mt-0 md:w-1/2 md:pl-16">
+                <span class="mb-1 font-label text-xs text-secondary">2022.01 — 2022.12</span>
+                <h3 class="font-headline text-2xl font-bold text-on-surface">iTechEx 신규개발팀 연구원</h3>
+                <p class="mb-2 text-sm font-label text-primary">INFOBANK</p>
+                <p class="max-w-md text-sm leading-relaxed text-on-surface-variant">
+                  백엔드와 안드로이드 개발 수행. Check2Check Application 등 모바일
+                  중심 프로젝트를 담당했습니다.
+                </p>
+              </div>
+            </div>
+
+            <div class="relative flex flex-col items-start md:flex-row md:items-center">
+              <div class="mb-4 flex flex-col md:mb-0 md:w-1/2 md:pr-16 md:text-right">
+                <span class="mb-1 font-label text-xs text-primary">2021.07 — 2021.12</span>
+                <h3 class="font-headline text-2xl font-bold text-on-surface">인포뱅크(주) 인턴</h3>
+                <p class="mb-2 text-sm font-label text-secondary">INFOBANK</p>
+                <p class="max-w-md text-sm leading-relaxed text-on-surface-variant md:ml-auto">
+                  실무 개발 커리어를 시작한 단계. 이후 모바일과 백엔드 중심 경력으로
+                  이어지는 기반을 만들었습니다.
+                </p>
+              </div>
+              <div class="absolute left-8 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-4 border-background bg-primary/40 md:left-1/2"></div>
+              <div class="hidden md:block md:w-1/2"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-surface-container-low px-8 py-32 md:px-16" id="projects">
+        <div class="mx-auto max-w-6xl">
+          <div class="mb-16 flex flex-col">
+            <p class="mb-2 font-label text-sm uppercase tracking-[0.3em] text-primary">Archive</p>
+            <h2 class="font-headline text-4xl font-bold text-on-surface md:text-5xl">Company Projects</h2>
+            <p class="mt-4 max-w-2xl text-sm leading-7 text-on-surface-variant">
+              회사 프로젝트 8개 전부를 수록했습니다. 챗봇, AICC, 메시징, Android
+              라이브러리, OpenAI 연동, 자동화 작업까지 경력 축을 누락 없이 보여줍니다.
             </p>
           </div>
-          <div class="timeline">
-            <article class="timeline-item">
-              <div class="timeline-date">2025.11 ~ 현재</div>
-              <div>
-                <div class="timeline-role">인포뱅크(주) iXpert AIX개발1팀</div>
-                <p class="timeline-copy">프론트엔드와 백엔드 개발을 함께 수행.</p>
+
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+            <article class="project-shell ghost-border group relative overflow-hidden rounded-2xl md:col-span-8">
+              <div class="project-art bg-[radial-gradient(circle_at_20%_20%,rgba(161,250,255,0.18),transparent_28%),radial-gradient(circle_at_80%_30%,rgba(213,117,255,0.16),transparent_24%),linear-gradient(135deg,rgba(10,14,20,0.4),rgba(0,0,0,0.02))]"></div>
+              <div class="relative flex h-full flex-col justify-end p-8">
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">2025-2026</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">Spring Boot</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">React</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">GitLab Runner</span>
+                </div>
+                <h3 class="mb-2 font-headline text-3xl font-bold text-on-surface">SK Broadband 챗봇/콜봇 구축</h3>
+                <p class="mb-6 max-w-2xl text-sm leading-7 text-on-surface-variant">
+                  SKT AICC Platform 기반 챗봇·콜봇 시스템 구축과 고객 요구사항 반영
+                  커스터마이징을 수행했습니다. 봇빌더-웹훅 연동 기반 Custom UI 구조,
+                  GitLab Runner 기반 CI/CD, 카카오 챗봇 연동, 기획자 협업까지 이어진
+                  가장 큰 규모의 프로젝트입니다.
+                </p>
+                <ul class="space-y-3 pl-5 text-sm leading-7 text-on-surface-variant list-disc">
+                  <li>챗봇 F/E까지 데이터가 유연하게 바인딩되도록 Custom UI 구조 설계.</li>
+                  <li>GitLab Runner 기반 빌드·배포 자동화 파이프라인 구성 및 상용 배포.</li>
+                  <li>SKT 챗봇으로 빌딩된 봇을 카카오 챗봇 채널과 연동.</li>
+                </ul>
               </div>
             </article>
-            <article class="timeline-item">
-              <div class="timeline-date">2024.02 ~ 2025.11</div>
-              <div>
-                <div class="timeline-role">인포뱅크(주) iComm AI프로젝트팀</div>
-                <p class="timeline-copy">프론트엔드와 백엔드 개발 수행.</p>
+
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-4">
+              <div class="project-art bg-[radial-gradient(circle_at_75%_20%,rgba(161,250,255,0.16),transparent_26%),radial-gradient(circle_at_20%_85%,rgba(213,117,255,0.16),transparent_22%)] line-grid"></div>
+              <div class="relative h-full p-8">
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">2026</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">Chatbot</span>
+                </div>
+                <h3 class="mb-3 font-headline text-2xl font-bold text-on-surface">AJ Networks 카카오 챗봇</h3>
+                <p class="text-sm leading-7 text-on-surface-variant">
+                  카카오 챗봇 스킬과 옵션 플러그인을 이용한 챗봇 구축, 기간계 연동
+                  비즈니스 로직 처리, 상용 환경 구성을 담당했습니다.
+                </p>
               </div>
             </article>
-            <article class="timeline-item">
-              <div class="timeline-date">2023.01 ~ 2024.02</div>
-              <div>
-                <div class="timeline-role">인포뱅크(주) iTechEx AIaaS 그룹 솔루션팀</div>
-                <p class="timeline-copy">백엔드와 안드로이드 개발 수행.</p>
+
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-6">
+              <div class="project-art bg-[radial-gradient(circle_at_10%_25%,rgba(161,250,255,0.16),transparent_22%),radial-gradient(circle_at_88%_78%,rgba(213,117,255,0.14),transparent_20%)]"></div>
+              <div class="relative p-8">
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">2024</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">AICC</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">MyBatis</span>
+                </div>
+                <h3 class="mb-3 font-headline text-2xl font-bold text-on-surface">SKT AICC 메시징 플랫폼 B/E, F/E 개발</h3>
+                <p class="text-sm leading-7 text-on-surface-variant">
+                  담당 도메인의 DB 설계, 비즈니스 로직 및 REST API 설계, Feign 기반 외부
+                  API 연동, React 프론트엔드 작업을 수행했습니다.
+                </p>
+                <ul class="mt-5 space-y-3 pl-5 text-sm leading-7 text-on-surface-variant list-disc">
+                  <li>Git Pipelines 기반 빌드·배포 스크립트 작성 및 구현.</li>
+                  <li>에러 코드 문서화, Jira 티켓 처리, 상용계 성능 테스트와 nginx, heap, WAS 설정 경험.</li>
+                </ul>
               </div>
             </article>
-            <article class="timeline-item">
-              <div class="timeline-date">2022.01 ~ 2022.12</div>
-              <div>
-                <div class="timeline-role">인포뱅크(주) iTechEx 신규개발팀</div>
-                <p class="timeline-copy">백엔드와 안드로이드 개발 수행.</p>
+
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-6">
+              <div class="project-art bg-[radial-gradient(circle_at_80%_15%,rgba(161,250,255,0.14),transparent_24%),radial-gradient(circle_at_20%_75%,rgba(213,117,255,0.2),transparent_22%)]"></div>
+              <div class="relative p-8">
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">2025</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">Query Tuning</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">React</span>
+                </div>
+                <h3 class="mb-3 font-headline text-2xl font-bold text-on-surface">SKT AICC 메시징 플랫폼 고도화 B/E, F/E 개발</h3>
+                <p class="text-sm leading-7 text-on-surface-variant">
+                  통계 관련 Query를 작성하며 subquery, join 중심 데이터 처리를 수행하고,
+                  `explain`을 이용해 쿼리 성능을 개선했습니다.
+                </p>
+                <ul class="mt-5 space-y-3 pl-5 text-sm leading-7 text-on-surface-variant list-disc">
+                  <li>성능 이슈를 쿼리 관점에서 분석하고 개선.</li>
+                  <li>Front 소스 관리를 위해 ESLint를 적용.</li>
+                </ul>
               </div>
             </article>
-            <article class="timeline-item">
-              <div class="timeline-date">2021.07 ~ 2021.12</div>
-              <div>
-                <div class="timeline-role">인포뱅크(주) 인턴</div>
-                <p class="timeline-copy">실무 개발 커리어 시작.</p>
+
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-4">
+              <div class="project-art bg-[radial-gradient(circle_at_25%_25%,rgba(161,250,255,0.18),transparent_24%),radial-gradient(circle_at_80%_75%,rgba(213,117,255,0.16),transparent_18%)]"></div>
+              <div class="relative p-8">
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">2023-2024</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">Android</span>
+                </div>
+                <h3 class="mb-3 font-headline text-xl font-bold text-on-surface">농협 UMS 안드로이드 Push Library</h3>
+                <p class="text-sm leading-7 text-on-surface-variant">
+                  Dagger 기반 의존성 주입, FCM 푸시 수신, Retrofit2 API 통신,
+                  CryptoSharedPreferences 기반 암호화 저장을 구현했습니다.
+                </p>
+              </div>
+            </article>
+
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-4">
+              <div class="project-art bg-[radial-gradient(circle_at_50%_20%,rgba(161,250,255,0.2),transparent_24%),radial-gradient(circle_at_50%_80%,rgba(213,117,255,0.12),transparent_20%)]"></div>
+              <div class="relative p-8">
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">2023</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">OpenAI API</span>
+                </div>
+                <h3 class="mb-3 font-headline text-xl font-bold text-on-surface">Open AI API 이용 Q&amp;A 연구</h3>
+                <p class="text-sm leading-7 text-on-surface-variant">
+                  Feign Client로 OpenAI API를 연동하고, Embedding 벡터를 PostgreSQL에
+                  저장해 코사인 유사도 기반 질의응답 구조를 연구했습니다.
+                </p>
+              </div>
+            </article>
+
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-4">
+              <div class="project-art bg-[radial-gradient(circle_at_30%_30%,rgba(161,250,255,0.14),transparent_18%),radial-gradient(circle_at_80%_60%,rgba(213,117,255,0.14),transparent_16%)] line-grid"></div>
+              <div class="relative p-8">
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">2022</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">Kotlin</span>
+                </div>
+                <h3 class="mb-3 font-headline text-xl font-bold text-on-surface">Check2Check Application</h3>
+                <p class="text-sm leading-7 text-on-surface-variant">
+                  Retrofit2, Room, FCM, SharedPreference, Coroutine을 활용한 모바일
+                  애플리케이션 구현 경험입니다.
+                </p>
+              </div>
+            </article>
+
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-12">
+              <div class="project-art bg-[radial-gradient(circle_at_18%_18%,rgba(161,250,255,0.14),transparent_24%),radial-gradient(circle_at_82%_20%,rgba(213,117,255,0.16),transparent_20%),linear-gradient(90deg,rgba(161,250,255,0.04),rgba(213,117,255,0.03))]"></div>
+              <div class="relative grid gap-8 p-8 lg:grid-cols-[minmax(0,1.1fr)_340px]">
+                <div>
+                  <div class="mb-4 flex flex-wrap gap-2">
+                    <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">2023</span>
+                    <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">Selenium</span>
+                    <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">Spring Boot</span>
+                    <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">Android</span>
+                  </div>
+                  <h3 class="mb-3 font-headline text-3xl font-bold text-on-surface">사내 웹페이지 결재문서 작성 자동화 작업</h3>
+                  <p class="text-sm leading-7 text-on-surface-variant">
+                    Selenium 기반 웹 자동화 작업을 구현하고, JPA/QueryDsl 기반 DB 접근,
+                    Domain/Presentation 계층 모듈화, 웹 자동화 API 설계를 수행했습니다.
+                    동시에 Android 측에서는 CameraX 기반 촬영, ML Kit와 ImageAnalysis
+                    기반 텍스트 추출, HSSFWorkBook 기반 Excel 생성까지 구현했습니다.
+                  </p>
+                </div>
+                <div class="rounded-xl bg-surface-container-highest/70 p-6">
+                  <p class="font-label text-[10px] uppercase tracking-[0.24em] text-primary">Dual Track Scope</p>
+                  <ul class="mt-5 space-y-3 pl-5 text-sm leading-7 text-on-surface-variant list-disc">
+                    <li>웹 자동화 구현 및 API 설계</li>
+                    <li>JPA, QueryDsl 기반 데이터 접근</li>
+                    <li>CameraX 촬영 및 이미지 저장</li>
+                    <li>ML Kit 기반 라이브 텍스트 추출</li>
+                    <li>Excel 생성 기능 구현</li>
+                  </ul>
+                </div>
               </div>
             </article>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="contact" class="panel section">
-          <div class="contact">
+      <section class="bg-surface px-8 py-32 md:px-16" id="personal">
+        <div class="mx-auto max-w-6xl">
+          <div class="mb-16 flex flex-col">
+            <p class="mb-2 font-label text-sm uppercase tracking-[0.3em] text-secondary">Personal Archive</p>
+            <h2 class="font-headline text-4xl font-bold text-on-surface md:text-5xl">Independent Builds</h2>
+            <p class="mt-4 max-w-2xl text-sm leading-7 text-on-surface-variant">
+              개인 프로젝트 3개와 학교 프로젝트 1개까지 별도로 정리했습니다. 업무 밖에서
+              무엇을 만들었는지까지 포함해야 전체 포트폴리오가 완성됩니다.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-12">
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-6">
+              <div class="project-art bg-[radial-gradient(circle_at_20%_18%,rgba(161,250,255,0.18),transparent_22%),radial-gradient(circle_at_80%_65%,rgba(213,117,255,0.16),transparent_18%)]"></div>
+              <div class="relative p-8">
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">2023</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">Kotlin</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">OpenAI</span>
+                </div>
+                <h3 class="mb-3 font-headline text-2xl font-bold text-on-surface">maro OpenAI Client</h3>
+                <p class="text-sm leading-7 text-on-surface-variant">
+                  Spring Boot 프로젝트에서 OpenAI API를 쉽게 사용할 수 있도록 만든
+                  Kotlin 기반 라이브러리입니다.
+                </p>
+                <a
+                  class="mt-6 inline-flex items-center gap-2 font-label text-xs uppercase tracking-widest text-primary transition-all hover:gap-3"
+                  href="https://github.com/parksy0109/maro_openai_client/blob/main/src/main/kotlin/com/maro/maro_openai_client/openai/OpenAIClient.kt"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View Source <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-6">
+              <div class="project-art bg-[radial-gradient(circle_at_80%_18%,rgba(161,250,255,0.14),transparent_22%),radial-gradient(circle_at_20%_70%,rgba(213,117,255,0.18),transparent_22%)]"></div>
+              <div class="relative p-8">
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">2022</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">Android</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">MPAndroidChart</span>
+                </div>
+                <h3 class="mb-3 font-headline text-2xl font-bold text-on-surface">재획 캘린더 - 나의 메이플 사냥 일지</h3>
+                <p class="text-sm leading-7 text-on-surface-variant">
+                  Room 기반 기록 앱으로 Navigation Graph, 공휴일 API 통신,
+                  MPAndroidChart Combined Chart, Jsoup 파싱, Crashlytics 연동,
+                  Coroutine 비동기 처리까지 구현했습니다.
+                </p>
+              </div>
+            </article>
+
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-6">
+              <div class="project-art bg-[radial-gradient(circle_at_25%_22%,rgba(161,250,255,0.15),transparent_18%),radial-gradient(circle_at_78%_70%,rgba(213,117,255,0.16),transparent_20%)] line-grid"></div>
+              <div class="relative p-8">
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">2022</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-primary">Android App</span>
+                </div>
+                <h3 class="mb-3 font-headline text-2xl font-bold text-on-surface">카운팅 앱 - 천의 자리수</h3>
+                <p class="text-sm leading-7 text-on-surface-variant">
+                  사용자가 설정한 속도에 따라 숫자가 증가하게 구현한 Simple Counting
+                  Machine Application입니다.
+                </p>
+                <a
+                  class="mt-6 inline-flex items-center gap-2 font-label text-xs uppercase tracking-widest text-primary transition-all hover:gap-3"
+                  href="https://github.com/parksy0109/SimpleCountingApplication"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub Repository <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="project-shell ghost-border relative overflow-hidden rounded-2xl md:col-span-6">
+              <div class="project-art bg-[radial-gradient(circle_at_72%_18%,rgba(161,250,255,0.16),transparent_20%),radial-gradient(circle_at_24%_76%,rgba(213,117,255,0.16),transparent_24%)]"></div>
+              <div class="relative p-8">
+                <div class="mb-4 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">2021</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">School Project</span>
+                  <span class="rounded-md bg-surface-variant/80 px-2 py-1 font-label text-[10px] uppercase text-secondary">Google Vision API</span>
+                </div>
+                <h3 class="mb-3 font-headline text-2xl font-bold text-on-surface">희동이 옷 찾기</h3>
+                <p class="text-sm leading-7 text-on-surface-variant">
+                  Google Vision API를 이용한 반려동물 의류 자동 추천 애플리케이션.
+                  SQLite 기반 사용자 강아지 데이터 저장과 사진 속 강아지 확인, 대표 색상
+                  추출 기능을 구현했습니다.
+                </p>
+                <a
+                  class="mt-6 inline-flex items-center gap-2 font-label text-xs uppercase tracking-widest text-primary transition-all hover:gap-3"
+                  href="https://github.com/parksy0109/FindingDogClothes"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub Repository <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="relative overflow-hidden bg-surface-container-low px-8 py-32 md:px-16" id="stacks">
+        <div class="mx-auto flex max-w-6xl flex-col items-start gap-20 md:flex-row">
+          <div class="md:w-1/2">
+            <p class="mb-2 font-label text-sm uppercase tracking-[0.3em] text-secondary">Technical Matrix</p>
+            <h2 class="mb-8 font-headline text-4xl font-bold text-on-surface md:text-5xl">Forging Delivery Range</h2>
+            <div class="space-y-8">
+              <div>
+                <div class="mb-3 flex items-end justify-between">
+                  <span class="font-headline text-lg font-bold text-on-surface">Backend Core</span>
+                  <span class="font-label text-[10px] uppercase tracking-[0.2em] text-primary">Java · Spring Boot · MySQL · MyBatis · Feign</span>
+                </div>
+                <div class="stack-line"></div>
+              </div>
+              <div>
+                <div class="mb-3 flex items-end justify-between">
+                  <span class="font-headline text-lg font-bold text-on-surface">Frontend Delivery</span>
+                  <span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">React · JavaScript · Axios · Custom UI</span>
+                </div>
+                <div class="stack-line"></div>
+              </div>
+              <div>
+                <div class="mb-3 flex items-end justify-between">
+                  <span class="font-headline text-lg font-bold text-on-surface">Android Build</span>
+                  <span class="font-label text-[10px] uppercase tracking-[0.2em] text-primary">Kotlin · Java · Retrofit2 · Room · Coroutine</span>
+                </div>
+                <div class="stack-line"></div>
+              </div>
+              <div>
+                <div class="mb-3 flex items-end justify-between">
+                  <span class="font-headline text-lg font-bold text-on-surface">AI &amp; Delivery</span>
+                  <span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">OpenAI API · Selenium · GitLab · Jira · nginx</span>
+                </div>
+                <div class="stack-line"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative md:w-1/2">
+            <div class="grid grid-cols-3 gap-4">
+              <div class="flex aspect-square flex-col items-center justify-center rounded-xl border border-outline-variant/10 bg-surface-container transition-colors hover:border-primary/50">
+                <span class="material-symbols-outlined mb-2 text-4xl text-primary">code</span>
+                <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Java</span>
+              </div>
+              <div class="mt-8 flex aspect-square flex-col items-center justify-center rounded-xl border border-outline-variant/10 bg-surface-container transition-colors hover:border-secondary/50">
+                <span class="material-symbols-outlined mb-2 text-4xl text-secondary">dns</span>
+                <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Spring Boot</span>
+              </div>
+              <div class="flex aspect-square flex-col items-center justify-center rounded-xl border border-outline-variant/10 bg-surface-container transition-colors hover:border-primary/50">
+                <span class="material-symbols-outlined mb-2 text-4xl text-primary">database</span>
+                <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">MySQL</span>
+              </div>
+              <div class="flex aspect-square flex-col items-center justify-center rounded-xl border border-outline-variant/10 bg-surface-container transition-colors hover:border-secondary/50">
+                <span class="material-symbols-outlined mb-2 text-4xl text-secondary">web</span>
+                <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">React</span>
+              </div>
+              <div class="mt-8 flex aspect-square flex-col items-center justify-center rounded-xl border border-outline-variant/10 bg-surface-container transition-colors hover:border-primary/50">
+                <span class="material-symbols-outlined mb-2 text-4xl text-primary">phone_iphone</span>
+                <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Android</span>
+              </div>
+              <div class="flex aspect-square flex-col items-center justify-center rounded-xl border border-outline-variant/10 bg-surface-container transition-colors hover:border-secondary/50">
+                <span class="material-symbols-outlined mb-2 text-4xl text-secondary">terminal</span>
+                <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Kotlin</span>
+              </div>
+              <div class="flex aspect-square flex-col items-center justify-center rounded-xl border border-outline-variant/10 bg-surface-container transition-colors hover:border-primary/50">
+                <span class="material-symbols-outlined mb-2 text-4xl text-primary">smart_toy</span>
+                <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">OpenAI API</span>
+              </div>
+              <div class="mt-8 flex aspect-square flex-col items-center justify-center rounded-xl border border-outline-variant/10 bg-surface-container transition-colors hover:border-secondary/50">
+                <span class="material-symbols-outlined mb-2 text-4xl text-secondary">cloud_upload</span>
+                <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">GitLab</span>
+              </div>
+              <div class="flex aspect-square flex-col items-center justify-center rounded-xl border border-outline-variant/10 bg-surface-container transition-colors hover:border-primary/50">
+                <span class="material-symbols-outlined mb-2 text-4xl text-primary">monitoring</span>
+                <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Jira</span>
+              </div>
+            </div>
+            <div class="absolute inset-0 -z-10 rounded-full bg-primary/5 blur-[80px]"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-surface px-8 py-32 md:px-16" id="contact">
+        <div class="glass-panel ghost-border relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] p-8 shadow-2xl md:p-16">
+          <div class="absolute right-0 top-0 p-4 opacity-10">
+            <span class="material-symbols-outlined text-9xl">alternate_email</span>
+          </div>
+          <div class="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div>
-              <h2 class="section-title">Contact</h2>
-              <p class="subtitle" style="margin-top: 12px; max-width: 520px;">
-                더 자세한 프로젝트 설명이나 협업 문의는 아래 경로로 연결할 수 있습니다.
+              <h2 class="mb-4 font-headline text-4xl font-bold text-on-surface md:text-5xl">Initiate Contact</h2>
+              <p class="mb-10 max-w-xl text-sm leading-7 text-on-surface-variant">
+                챗봇, 백엔드, 프론트엔드, 안드로이드가 함께 걸린 프로젝트이거나,
+                서비스 연동과 운영 배포까지 포함된 실무라면 특히 잘 맞습니다.
               </p>
+
+              <div class="grid gap-8 md:grid-cols-2">
+                <div class="group">
+                  <label class="mb-1 block font-label text-[10px] uppercase tracking-widest text-outline transition-colors group-focus-within:text-primary">Position</label>
+                  <div class="border-b border-outline/30 py-2 text-on-surface">Backend Developer</div>
+                </div>
+                <div class="group">
+                  <label class="mb-1 block font-label text-[10px] uppercase tracking-widest text-outline transition-colors group-focus-within:text-primary">Primary Focus</label>
+                  <div class="border-b border-outline/30 py-2 text-on-surface">Chatbot, AICC, Messaging, Android</div>
+                </div>
+                <div class="group md:col-span-2">
+                  <label class="mb-1 block font-label text-[10px] uppercase tracking-widest text-outline transition-colors group-focus-within:text-primary">Education</label>
+                  <div class="border-b border-outline/30 py-2 leading-7 text-on-surface">
+                    2013-03 ~ 2022-08 한성대학교 (회계재무경영트랙, 모바일 소프트웨어트랙)
+                  </div>
+                </div>
+                <div class="group md:col-span-2">
+                  <label class="mb-1 block font-label text-[10px] uppercase tracking-widest text-outline transition-colors group-focus-within:text-primary">Working Note</label>
+                  <div class="border-b border-outline/30 py-2 leading-7 text-on-surface-variant">
+                    새로운 기술과 도전을 좋아하며, 프로젝트 수행 과정에서 협업과 문제 해결
+                    역량을 계속 확장해왔습니다.
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="contact-links">
-              <a class="button button-primary" href="mailto:kalnalvid@gmail.com">kalnalvid@gmail.com</a>
-              <a class="button button-secondary" href="https://github.com/parksy0109" target="_blank" rel="noreferrer">github.com/parksy0109</a>
+
+            <div class="space-y-5">
+              <div class="rounded-2xl bg-surface-container p-6">
+                <p class="font-label text-[10px] uppercase tracking-[0.24em] text-primary">Email</p>
+                <a class="mt-3 block text-lg text-on-surface transition-colors hover:text-primary" href="mailto:kalnalvid@gmail.com">kalnalvid@gmail.com</a>
+              </div>
+              <div class="rounded-2xl bg-surface-container p-6">
+                <p class="font-label text-[10px] uppercase tracking-[0.24em] text-secondary">GitHub</p>
+                <a
+                  class="mt-3 block text-lg text-on-surface transition-colors hover:text-secondary"
+                  href="https://github.com/parksy0109"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  github.com/parksy0109
+                </a>
+              </div>
+              <div class="rounded-2xl bg-surface-container p-6">
+                <p class="font-label text-[10px] uppercase tracking-[0.24em] text-primary">Main Stack</p>
+                <p class="mt-3 leading-7 text-on-surface-variant">Java, Spring Boot, MySQL, React, Android, Kotlin</p>
+              </div>
+              <div class="flex flex-wrap gap-4 pt-2">
+                <a
+                  class="rounded-full bg-primary px-8 py-4 font-headline font-bold text-black transition-all hover:shadow-[0_0_20px_#a1faff] active:scale-95"
+                  href="mailto:kalnalvid@gmail.com"
+                >
+                  Send Email
+                </a>
+                <a
+                  class="rounded-full border border-outline-variant/30 px-8 py-4 font-headline font-bold text-primary transition-all hover:bg-primary/5"
+                  href="#home"
+                >
+                  Back to Top
+                </a>
+              </div>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
-      <footer>
-        Built as a GitHub Pages portfolio starter based on the latest career summary.
+      <footer class="flex flex-col items-center justify-center gap-6 border-t border-slate-800/30 bg-black px-8 py-12">
+        <div class="flex flex-wrap gap-8">
+          <a
+            class="font-['Space_Grotesk'] text-[10px] uppercase tracking-[0.2em] text-slate-600 opacity-80 transition-colors hover:text-cyan-400 hover:opacity-100"
+            href="https://github.com/parksy0109"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+          <a
+            class="font-['Space_Grotesk'] text-[10px] uppercase tracking-[0.2em] text-slate-600 opacity-80 transition-colors hover:text-cyan-400 hover:opacity-100"
+            href="mailto:kalnalvid@gmail.com"
+          >
+            Email
+          </a>
+        </div>
+        <p class="font-['Space_Grotesk'] text-[10px] uppercase tracking-[0.2em] text-slate-600">
+          © 2026 Park SooYong • Engineered for Full Career Archive
+        </p>
       </footer>
+    </main>
+
+    <div
+      class="fixed bottom-0 z-50 flex w-full items-center justify-around border-t border-outline-variant/10 bg-slate-950/80 py-4 backdrop-blur-xl lg:hidden"
+    >
+      <a class="flex flex-col items-center gap-1 text-cyan-400" href="#home">
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-label text-[8px] uppercase">Home</span>
+      </a>
+      <a class="flex flex-col items-center gap-1 text-slate-400" href="#experience">
+        <span class="material-symbols-outlined">timeline</span>
+        <span class="font-label text-[8px] uppercase">History</span>
+      </a>
+      <a class="flex flex-col items-center gap-1 text-slate-400" href="#projects">
+        <span class="material-symbols-outlined">terminal</span>
+        <span class="font-label text-[8px] uppercase">Archive</span>
+      </a>
+      <a class="flex flex-col items-center gap-1 text-slate-400" href="#contact">
+        <span class="material-symbols-outlined">mail</span>
+        <span class="font-label text-[8px] uppercase">Contact</span>
+      </a>
     </div>
   </body>
 </html>
